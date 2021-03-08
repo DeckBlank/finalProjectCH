@@ -1,7 +1,32 @@
 import express from "express";
+import {Productos} from '../../core'
 
 export const productos = express.Router()
 
 productos.get('/productos/',(req,res)=>{
-    res.json('todos los productos')
+    res.json(Productos.getItems())
+})
+
+productos.get('/productos/:id',(req,res)=>{
+    let id = req.params.id
+    res.json(Productos.getItemsById(id))
+})
+
+productos.post('/productos/',(req,res,next)=>{
+    let body = req.body
+    res.json(Productos.addItem(body))
+})
+
+productos.put('/productos/:id',(req,res,next)=>{
+    let body = req.body
+    res.json(Productos.putItemById(body));
+    req.message = Productos.getItems();
+    next()
+})
+
+productos.delete('/productos/:id',(req,res,next)=>{
+    let id = req.params.id
+    res.json(Productos.deleteItemById(id));
+    req.message = Productos.getItems();
+    next()
 })

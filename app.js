@@ -20,7 +20,7 @@ app.use(( err,req, res, next) => {
 
  
 for (const ruta in rutas) {
-    app.use('/',rutas[ruta])
+    app.use('/api/',rutas[ruta])
 }
     
 app.get("/*/",(req,res)=>{

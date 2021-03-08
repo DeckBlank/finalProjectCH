@@ -1,0 +1,23 @@
+{
+  "name": "quince",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.8",
+    "@babel/node": "^7.13.0",
+    "@babel/preset-env": "^7.13.9"
+  },
+  "scripts": {
+    "dev": "nodemon ./app.js --exec babel-node"
+  },
+  "author": "JLGS",
+  "license": "ISC"
+}

@@ -2,14 +2,28 @@ import dotenv from 'dotenv'
 dotenv.config({path:'.env'})
 import express from 'express'
 import http from 'http'
+import {corsOptions,statics} from './config'
+import cors from 'cors'
 
-const app = express();
+import * as rutas from './routes'
+
+export const app = express();
+export const DIR_NAME = __dirname
+
+app.use(cors(corsOptions))
+app.use(express.json());
 
 
-const PORT = process.env.PORT
+app.use(( err,req, res, next) => {
+    res.status(400).send(err.message);
+ });
 
-
-app.listen(PORT,(error)=>{
-    if(error)console.error(error);
-    console.log(`Aplicacion en ${PORT}`);
+ 
+for (const ruta in rutas) {
+    app.use('/',rutas[ruta])
+}
+    
+app.get("/*/",(req,res)=>{
+    let estaticos =  statics(DIR_NAME)
+    res.sendFile(estaticos.path, estaticos.root)
 })

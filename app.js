@@ -4,12 +4,12 @@ import express from 'express'
 import http from 'http'
 import {corsOptions,statics} from './config'
 import cors from 'cors'
-
+import morgan from 'morgan'
 import * as rutas from './routes'
 
 export const app = express();
 export const DIR_NAME = __dirname
-
+app.use(morgan('tiny'))
 app.use(cors(corsOptions))
 app.use(express.json());
 

@@ -19,6 +19,7 @@ class productos{
   
     addItem(obj){
         let data  = this.validacionEsquema('post',obj)
+        console.log(data);
         if(!data) return this.error()
         if(!data) return this.error()
         let id = this.productos.length;
@@ -85,7 +86,7 @@ class productos{
                 case 'post':
                     for (const key in esquema) {
                         if(esquema[key]['default']){
-                            datoValidado[key] = data[key]['default']
+                            datoValidado[key] = esquema[key]['default']
                         }else{
                             if(esquema[key]['type']==='string') datoValidado[key] = data[key].toString()
                             if(esquema[key]['type']==='number') datoValidado[key] = parseInt(data[key])
@@ -109,6 +110,7 @@ class productos{
             }
             return datoValidado;    
         } catch (error) {
+            console.log(error);
             return false;
         }
     }

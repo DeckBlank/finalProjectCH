@@ -1,6 +1,10 @@
 import {Productos} from './productos'
+import {Carrito} from './carrito'
 
-
-export{
-    Productos
+/* const dbProductos = null;
+if(!dbProductos) dbProductos= Productos */
+module.exports = {
+    /* dbProductos, */
+    Productos,
+    Carrito
 }

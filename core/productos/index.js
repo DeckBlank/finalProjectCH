@@ -72,25 +72,34 @@ class productos{
         let datoValidado = {}
         let esquema = {
             //id : "number",
-            nombre : "string",
-            descripcion : "string",
-            codigo : "string",
-            foto : "string",
-            precio : "number",
-            stock : "number"
+            nombre : {type:"string"},
+            descripcion : {type:"string"},
+            codigo : {type:"string"},
+            foto : {type:"string"},
+            precio : {type:"number"},
+            stock : {type:"number"},
+            timestamp : {type:"date",default:new Date()},
         }
         try {
             switch (metodo.toLowerCase()) {
                 case 'post':
                     for (const key in esquema) {
-                        if(esquema[key]==='string') datoValidado[key] = data[key].toString()
-                        if(esquema[key]==='number') datoValidado[key] = parseInt(data[key])
+                        if(esquema[key]['default']){
+                            datoValidado[key] = data[key]['default']
+                        }else{
+                            if(esquema[key]['type']==='string') datoValidado[key] = data[key].toString()
+                            if(esquema[key]['type']==='number') datoValidado[key] = parseInt(data[key])
+                        }
                     }
                     break;
                 case 'put':
                     for (const key in esquema) {
-                        if(esquema[key]==='string') datoValidado[key] = data[key].toString()
-                        if(esquema[key]==='number') datoValidado[key] = parseInt(data[key])
+                        if(esquema[key]['default']){
+                            datoValidado[key] = data[key]['default']
+                        }else{
+                            if(esquema[key]['type']==='string') datoValidado[key] = data[key].toString()
+                            if(esquema[key]['type']==='number') datoValidado[key] = parseInt(data[key])
+                        }
                     }
                     datoValidado['id'] = parseInt(data['id'])
                     break;
